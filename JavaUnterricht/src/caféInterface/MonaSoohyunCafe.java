@@ -21,6 +21,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Label;
 import javax.swing.JLabel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class MonaSoohyunCafe extends JFrame {
 
@@ -31,7 +33,7 @@ public class MonaSoohyunCafe extends JFrame {
 	private String orderItemName;
 	private JList orders;
 	private double totalAmount;
-	
+	private JLabel lblNewLabel_1;
 	/**
 	 * Launch the application.
 	 */
@@ -97,10 +99,14 @@ public class MonaSoohyunCafe extends JFrame {
 		txtNoItem.setColumns(10);
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(222, 46, 110, 105);
+		scrollPane_1.setBounds(173, 46, 110, 105);
 		contentPane.add(scrollPane_1);
 		
 		
+		JLabel lblNewLabel_1 = new JLabel("0");
+		
+		lblNewLabel_1.setBounds(260, 193, 46, 14);
+		contentPane.add(lblNewLabel_1);
 		
 		JButton btnNewButton = new JButton("Bestellen");
 		btnNewButton.addMouseListener(new MouseAdapter() {
@@ -112,6 +118,7 @@ public class MonaSoohyunCafe extends JFrame {
 				scrollPane_1.setViewportView(orders);
 				 String result = readOnlyInt(orderItemName);
 				totalAmount += Double.parseDouble(result);
+				lblNewLabel_1.setText(totalAmount+"");
 				System.out.println("Gesamtbetrag: " + totalAmount);
 			}
 		});
@@ -127,13 +134,24 @@ public class MonaSoohyunCafe extends JFrame {
 		contentPane.add(label);
 		
 		JLabel lblNewLabel = new JLabel("Gesamtbetrag:");
-		lblNewLabel.setBounds(222, 193, 77, 14);
+		lblNewLabel.setBounds(173, 193, 77, 14);
 		contentPane.add(lblNewLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("0");
-		lblNewLabel_1.setText(totalAmount+"");
-		lblNewLabel_1.setBounds(309, 193, 46, 14);
-		contentPane.add(lblNewLabel_1);
+		JButton btnNewButton_1 = new JButton("Alles stornieren");
+		
+		btnNewButton_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				orders.removeAll();
+				System.out.println(orders);
+			}
+		});
+		
+	
+		btnNewButton_1.setBounds(270, 227, 154, 23);
+		contentPane.add(btnNewButton_1);
+		
+		
 		
 		
 		
