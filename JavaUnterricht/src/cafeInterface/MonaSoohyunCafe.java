@@ -27,13 +27,15 @@ import java.awt.event.ActionEvent;
 public class MonaSoohyunCafe extends JFrame {
 
 	private JPanel contentPane;
-	private String[] coffees = {"Americano 4.0", "Latte Machiato 5.0", "Cappuchino 4.5", "Espresso 3.0", "Kakao 3.0", "Milchshake 4.0", "Wodka 4.0"};
+	private String[] coffees = { "Americano 4.0", "Latte Machiato 5.0", "Cappuchino 4.5", "Espresso 3.0", "Kakao 3.0",
+			"Milchshake 4.0", "Wodka 4.0" };
 	private JTextField txtNoItem;
 	private ArrayList<String> orderItems = new ArrayList<String>();
 	private String orderItemName;
 	private JList orders;
 	private double totalAmount;
 	private JLabel lblNewLabel_1;
+
 	/**
 	 * Launch the application.
 	 */
@@ -51,22 +53,21 @@ public class MonaSoohyunCafe extends JFrame {
 	}
 
 	public String readOnlyString(String wholeString) {
-		String onlyString = wholeString.replaceAll("[0-9.]","");
+		String onlyString = wholeString.replaceAll("[0-9.]", "");
 		System.out.println(onlyString);
 		return onlyString;
 	}
-	
-	
+
 	public String readOnlyInt(String wholeString) {
-		String onlyInt= wholeString.replaceAll("[^0-9.]","");
+		String onlyInt = wholeString.replaceAll("[^0-9.]", "");
 		System.out.println(onlyInt);
 		return onlyInt;
 	}
-				
 
 	/**
 	 * Create the frame.
-	 * @return 
+	 * 
+	 * @return
 	 */
 	public MonaSoohyunCafe() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -75,39 +76,38 @@ public class MonaSoohyunCafe extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 46, 130, 105);
 		contentPane.add(scrollPane);
-		
+
 		JList list = new JList(coffees);
 		list.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
-				 String selectedItem = (String) list.getSelectedValue();
-				 orderItemName = selectedItem;
-				 txtNoItem.setText(readOnlyString(selectedItem));
-				
+				String selectedItem = (String) list.getSelectedValue();
+				orderItemName = selectedItem;
+				txtNoItem.setText(readOnlyString(selectedItem));
+
 			}
 		});
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane.setViewportView(list);
-		
+
 		txtNoItem = new JTextField();
 		txtNoItem.setText("No item");
 		txtNoItem.setBounds(10, 190, 86, 20);
 		contentPane.add(txtNoItem);
 		txtNoItem.setColumns(10);
-		
+
 		JScrollPane scrollPane_1 = new JScrollPane();
 		scrollPane_1.setBounds(218, 46, 110, 105);
 		contentPane.add(scrollPane_1);
-		
-		
+
 		JLabel lblNewLabel_1 = new JLabel("0");
-		
+
 		lblNewLabel_1.setBounds(294, 193, 46, 14);
 		contentPane.add(lblNewLabel_1);
-		
+
 		JButton btnNewButton = new JButton("Bestellen");
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
@@ -118,43 +118,40 @@ public class MonaSoohyunCafe extends JFrame {
 				scrollPane_1.setViewportView(orders);
 				String result = readOnlyInt(orderItemName);
 				totalAmount += Double.parseDouble(result);
-				lblNewLabel_1.setText(totalAmount+"");
+				lblNewLabel_1.setText(totalAmount + "");
 				System.out.println("Gesamtbetrag: " + totalAmount);
 			}
 		});
 		btnNewButton.setBounds(10, 221, 89, 23);
 		contentPane.add(btnNewButton);
-		
-		
-		
-		
-		
+
 		Label label = new Label("Willkommen!");
 		label.setBounds(10, 10, 86, 34);
 		contentPane.add(label);
-		
-		
-		
+
 		JLabel lblNewLabel = new JLabel("Gesamtbetrag:");
 		lblNewLabel.setBounds(157, 193, 127, 14);
 		contentPane.add(lblNewLabel);
-		
+
 		JButton btnNewButton_1 = new JButton("Alles stornieren");
-		
+
 		btnNewButton_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				// 1. remove all visible ordered item on scrollPane_1 
 				orderItems.removeAll(orderItems);
 				System.out.println(orderItems);
 				orders = new JList(orderItems.toArray());
 				scrollPane_1.setViewportView(orders);
+				
+				// 2. reset totalamount for the receipt
+				totalAmount = 0; // init again 
+				lblNewLabel_1.setText(totalAmount + "");
 			}
 		});
-		
-	
+
 		btnNewButton_1.setBounds(270, 227, 154, 23);
 		contentPane.add(btnNewButton_1);
-		
-		
+
 	}
 }
