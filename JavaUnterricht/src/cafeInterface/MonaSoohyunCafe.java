@@ -134,6 +134,7 @@ public class MonaSoohyunCafe extends JFrame {
 		contentPane.add(label);
 		
 		
+		
 		JLabel lblNewLabel = new JLabel("Gesamtbetrag:");
 		lblNewLabel.setBounds(157, 193, 127, 14);
 		contentPane.add(lblNewLabel);
