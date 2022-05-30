@@ -16,9 +16,14 @@ import javax.swing.ListModel;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.ListSelectionEvent;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.awt.Label;
 import javax.swing.JLabel;
 import java.awt.event.ActionListener;
@@ -108,7 +113,7 @@ public class MonaSoohyunCafe extends JFrame {
 		lblNewLabel_1.setBounds(294, 193, 46, 14);
 		contentPane.add(lblNewLabel_1);
 
-		JButton btnNewButton = new JButton("Bestellen");
+		JButton btnNewButton = new JButton("Bestellung Hinzufuegen");
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -122,7 +127,7 @@ public class MonaSoohyunCafe extends JFrame {
 				System.out.println("Gesamtbetrag: " + totalAmount);
 			}
 		});
-		btnNewButton.setBounds(10, 221, 89, 23);
+		btnNewButton.setBounds(10, 221, 147, 23);
 		contentPane.add(btnNewButton);
 
 		Label label = new Label("Willkommen!");
@@ -150,8 +155,36 @@ public class MonaSoohyunCafe extends JFrame {
 			}
 		});
 
-		btnNewButton_1.setBounds(270, 227, 154, 23);
+		btnNewButton_1.setBounds(304, 227, 120, 23);
 		contentPane.add(btnNewButton_1);
+		
+		JButton btnNewButton_2 = new JButton("Bestellen");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				File file = new File("C:\\Users\\Soohyun\\Desktop\\DANKESCHOEN.PNG");
+				// C:\Users\Soohyun\Desktop
+				// C:\\Users\\Soohyun\\Desktop\\Newman Paul\\JavaUnterricht\\src\\images\\sff.png
+		        BufferedImage img;
+				try {
+					img = ImageIO.read(file);
+					JLabel lb = new JLabel(new ImageIcon(img));
+			        JFrame f = new JFrame("draw Image");
+			        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			        f.getContentPane().add(lb);
+			        f.pack();
+			        f.setLocation(200,200);
+			        f.setVisible(true);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+		        
+		        
+			
+			}
+		});
+		btnNewButton_2.setBounds(206, 227, 89, 23);
+		contentPane.add(btnNewButton_2);
 
 	}
 }
