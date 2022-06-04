@@ -1,18 +1,15 @@
 package cafeInterface;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import java.awt.List;
 import java.util.ArrayList;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
-import javax.swing.ListModel;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.ListSelectionEvent;
@@ -100,7 +97,7 @@ public class MonaSoohyunCafe extends JFrame {
 
 		txtNoItem = new JTextField();
 		txtNoItem.setText("No item");
-		txtNoItem.setBounds(10, 190, 86, 20);
+		txtNoItem.setBounds(10, 166, 86, 20);
 		contentPane.add(txtNoItem);
 		txtNoItem.setColumns(10);
 
@@ -110,24 +107,24 @@ public class MonaSoohyunCafe extends JFrame {
 
 		JLabel lblNewLabel_1 = new JLabel("0");
 
-		lblNewLabel_1.setBounds(294, 193, 46, 14);
+		lblNewLabel_1.setBounds(357, 169, 46, 14);
 		contentPane.add(lblNewLabel_1);
 
-		JButton btnNewButton = new JButton("Bestellung Hinzufuegen");
+		JButton btnNewButton = new JButton("Item hinzufügen");
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				orderItems.add(orderItemName);
-				System.out.println(orderItems);
+				//System.out.println(orderItems);
 				orders = new JList(orderItems.toArray());
 				scrollPane_1.setViewportView(orders);
 				String result = readOnlyInt(orderItemName);
 				totalAmount += Double.parseDouble(result);
 				lblNewLabel_1.setText(totalAmount + "");
-				System.out.println("Gesamtbetrag: " + totalAmount);
+				//System.out.println("Gesamtbetrag: " + totalAmount);
 			}
 		});
-		btnNewButton.setBounds(10, 221, 147, 23);
+		btnNewButton.setBounds(6, 198, 160, 23);
 		contentPane.add(btnNewButton);
 
 		Label label = new Label("Willkommen!");
@@ -135,7 +132,7 @@ public class MonaSoohyunCafe extends JFrame {
 		contentPane.add(label);
 
 		JLabel lblNewLabel = new JLabel("Gesamtbetrag:");
-		lblNewLabel.setBounds(157, 193, 127, 14);
+		lblNewLabel.setBounds(243, 169, 127, 14);
 		contentPane.add(lblNewLabel);
 
 		JButton btnNewButton_1 = new JButton("Alles stornieren");
@@ -155,35 +152,34 @@ public class MonaSoohyunCafe extends JFrame {
 			}
 		});
 
-		btnNewButton_1.setBounds(304, 227, 120, 23);
+		btnNewButton_1.setBounds(10, 233, 154, 23);
 		contentPane.add(btnNewButton_1);
 		
 		JButton btnNewButton_2 = new JButton("Bestellen");
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				File file = new File("C:\\Users\\Soohyun\\Desktop\\DANKESCHOEN.PNG");
-				// C:\Users\Soohyun\Desktop
-				// C:\\Users\\Soohyun\\Desktop\\Newman Paul\\JavaUnterricht\\src\\images\\sff.png
-		        BufferedImage img;
+				System.out.println(orderItems);
+				System.out.println("Gesamtbetrag: " + totalAmount);
+				
+				File file = new File("/Users/mona/git/MonaCafe/JavaUnterricht/src/cafeInterface/GutenAppetit.png");
+				BufferedImage img;
 				try {
 					img = ImageIO.read(file);
 					JLabel lb = new JLabel(new ImageIcon(img));
-			        JFrame f = new JFrame("draw Image");
-			        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			        f.getContentPane().add(lb);
-			        f.pack();
-			        f.setLocation(200,200);
-			        f.setVisible(true);
+					JFrame f = new JFrame("draw Image");
+					f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+					f.getContentPane().add(lb);
+					f.pack();
+					f.setLocation(200,200);
+					f.setVisible(true);		
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-		        
-		        
-			
+				
 			}
 		});
-		btnNewButton_2.setBounds(206, 227, 89, 23);
+		btnNewButton_2.setBounds(327, 221, 117, 29);
 		contentPane.add(btnNewButton_2);
 
 	}
