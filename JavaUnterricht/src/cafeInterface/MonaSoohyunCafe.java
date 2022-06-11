@@ -49,7 +49,7 @@ public class MonaSoohyunCafe extends JFrame {
 			public void run() {
 				try {
 					MonaSoohyunCafe frame = new MonaSoohyunCafe();
-					frame.setVisible(true);
+					frame.setVisible(false);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
