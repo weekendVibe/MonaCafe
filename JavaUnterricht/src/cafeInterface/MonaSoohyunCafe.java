@@ -43,7 +43,7 @@ public class MonaSoohyunCafe extends JFrame {
 	private JList orders;
 	private double totalAmount;
 	private JLabel lblNewLabel_1;
- 
+
 	/**
 	 * Launch the application.
 	 */
@@ -56,7 +56,7 @@ public class MonaSoohyunCafe extends JFrame {
 					frame.setVisible(true);
 					frame.setTitle("Mona-Soohyun Cafe");
 					frame.setResizable(false);
-					//frame.setDefaultCloseOperation();
+					// frame.setDefaultCloseOperation();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -130,19 +130,19 @@ public class MonaSoohyunCafe extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				orderItems.add(orderItemName);
-				//System.out.println(orderItems);
+				// System.out.println(orderItems);
 				orders = new JList(orderItems.toArray());
 				scrollPane_1.setViewportView(orders);
 				try {
 					String result = readOnlyInt(orderItemName);
-				totalAmount += Double.parseDouble(result);
-				lblNewLabel_1.setText(totalAmount + "");
-					
+					totalAmount += Double.parseDouble(result);
+					lblNewLabel_1.setText(totalAmount + "");
+
 				} catch (NullPointerException ex) {
 					System.out.println("Test");
 				}
-				
-				//System.out.println("Gesamtbetrag: " + totalAmount);
+
+				// System.out.println("Gesamtbetrag: " + totalAmount);
 			}
 		});
 		btnNewButton.setBounds(10, 200, 154, 23);
@@ -166,20 +166,21 @@ public class MonaSoohyunCafe extends JFrame {
 		btnNewButton_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				// 1. remove all visible ordered item on scrollPane_1 
-				try {				if(orderItems.get(0)=="") {
-					orderItems.removeAll(orderItems);
-				System.out.println(orderItems);
-					
-				}
-				
-				orders = new JList(orderItems.toArray());
-				scrollPane_1.setViewportView(orders);
-				
-				// 2. reset totalamount for the receipt
-				totalAmount = 0; // init again 
-				lblNewLabel_1.setText(totalAmount + "");
-					
+				// 1. remove all visible ordered item on scrollPane_1
+				try {
+					if (orderItems.get(0) == "") {
+						orderItems.removeAll(orderItems);
+						System.out.println(orderItems);
+
+					}
+
+					orders = new JList(orderItems.toArray());
+					scrollPane_1.setViewportView(orders);
+
+					// 2. reset totalamount for the receipt
+					totalAmount = 0; // init again
+					lblNewLabel_1.setText(totalAmount + "");
+
 				} catch (IndexOutOfBoundsException ex) {
 					System.out.println("Test2");
 				}
@@ -189,16 +190,16 @@ public class MonaSoohyunCafe extends JFrame {
 
 		btnNewButton_1.setBounds(10, 233, 154, 23);
 		contentPane.add(btnNewButton_1);
-		
+
 		JButton btnNewButton_2 = new JButton("Bestellen");
 		btnNewButton_2.setBackground(Color.YELLOW);
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println(orderItems);
 				System.out.println("Gesamtbetrag: " + totalAmount);
-				
+
 				File file = new File("src/images/coffee.PNG");
-		
+
 				BufferedImage img;
 				try {
 					img = ImageIO.read(file);
@@ -207,24 +208,24 @@ public class MonaSoohyunCafe extends JFrame {
 					f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 					f.getContentPane().add(lb);
 					f.pack();
-					f.setLocation(200,200);
-					f.setVisible(true);		
+					f.setLocation(200, 200);
+					f.setVisible(true);
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				
+
 			}
 		});
 		btnNewButton_2.setBounds(199, 230, 136, 29);
 		contentPane.add(btnNewButton_2);
-		
+
 		JButton btnNewButton_3 = new JButton("New button");
 		btnNewButton_3.setIcon(new ImageIcon("src\\images\\pikachu.gif.gif"));
 
 		btnNewButton_3.setBounds(454, 10, 175, 202);
 		contentPane.add(btnNewButton_3);
-		
+
 		JButton btnNewButton_4 = new JButton("HELP");
 		btnNewButton_4.setForeground(Color.YELLOW);
 		btnNewButton_4.setBackground(Color.DARK_GRAY);
