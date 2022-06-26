@@ -43,7 +43,7 @@ public class MonaSoohyunCafe extends JFrame {
 	private JList orders;
 	private double totalAmount;
 	private JLabel lblNewLabel_1;
-
+ 
 	/**
 	 * Launch the application.
 	 */
@@ -181,12 +181,8 @@ public class MonaSoohyunCafe extends JFrame {
 				System.out.println(orderItems);
 				System.out.println("Gesamtbetrag: " + totalAmount);
 				
-				//File file = new File("/Users/mona/git/MonaCafe/JavaUnterricht/src/cafeInterface/GutenAppetit.png");
-				File file = new File("C:\\Users\\Soohyun\\Desktop\\coffee.png");
-				
-				
-
-				
+				File file = new File("src/images/coffee.PNG");
+		
 				BufferedImage img;
 				try {
 					img = ImageIO.read(file);
@@ -208,7 +204,8 @@ public class MonaSoohyunCafe extends JFrame {
 		contentPane.add(btnNewButton_2);
 		
 		JButton btnNewButton_3 = new JButton("New button");
-		btnNewButton_3.setIcon(new ImageIcon("C:\\Users\\Soohyun\\Desktop\\Newman Paul\\JavaUnterricht\\src\\images\\pikachu.gif.gif"));
+		btnNewButton_3.setIcon(new ImageIcon("src\\images\\pikachu.gif.gif"));
+
 		btnNewButton_3.setBounds(454, 10, 175, 202);
 		contentPane.add(btnNewButton_3);
 		
