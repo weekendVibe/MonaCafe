@@ -28,6 +28,9 @@ import java.awt.Label;
 import javax.swing.JLabel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
+import java.awt.Font;
+import javax.swing.border.BevelBorder;
 
 public class MonaSoohyunCafe extends JFrame {
 
@@ -40,7 +43,7 @@ public class MonaSoohyunCafe extends JFrame {
 	private JList orders;
 	private double totalAmount;
 	private JLabel lblNewLabel_1;
-
+ 
 	/**
 	 * Launch the application.
 	 */
@@ -50,6 +53,10 @@ public class MonaSoohyunCafe extends JFrame {
 				try {
 					MonaSoohyunCafe frame = new MonaSoohyunCafe();
 					frame.setVisible(false);
+					frame.setVisible(true);
+					frame.setTitle("Mona-Soohyun Cafe");
+					frame.setResizable(false);
+					//frame.setDefaultCloseOperation();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -76,14 +83,15 @@ public class MonaSoohyunCafe extends JFrame {
 	 */
 	public MonaSoohyunCafe() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 652, 316);
 		contentPane = new JPanel();
+		contentPane.setBackground(Color.GRAY);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 46, 130, 105);
+		scrollPane.setBounds(10, 46, 154, 105);
 		contentPane.add(scrollPane);
 
 		JList list = new JList(coffees);
@@ -99,21 +107,25 @@ public class MonaSoohyunCafe extends JFrame {
 		scrollPane.setViewportView(list);
 
 		txtNoItem = new JTextField();
+		txtNoItem.setForeground(Color.BLACK);
+		txtNoItem.setBackground(Color.LIGHT_GRAY);
 		txtNoItem.setText("No item");
-		txtNoItem.setBounds(10, 166, 86, 20);
+		txtNoItem.setBounds(10, 166, 154, 20);
 		contentPane.add(txtNoItem);
 		txtNoItem.setColumns(10);
 
 		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(218, 46, 110, 105);
+		scrollPane_1.setViewportBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		scrollPane_1.setBounds(199, 10, 136, 141);
 		contentPane.add(scrollPane_1);
 
 		JLabel lblNewLabel_1 = new JLabel("0");
 
-		lblNewLabel_1.setBounds(357, 169, 46, 14);
+		lblNewLabel_1.setBounds(295, 169, 55, 14);
 		contentPane.add(lblNewLabel_1);
 
 		JButton btnNewButton = new JButton("Item hinzufügen");
+		btnNewButton.setBackground(Color.LIGHT_GRAY);
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -121,37 +133,57 @@ public class MonaSoohyunCafe extends JFrame {
 				//System.out.println(orderItems);
 				orders = new JList(orderItems.toArray());
 				scrollPane_1.setViewportView(orders);
-				String result = readOnlyInt(orderItemName);
+				try {
+					String result = readOnlyInt(orderItemName);
 				totalAmount += Double.parseDouble(result);
 				lblNewLabel_1.setText(totalAmount + "");
+					
+				} catch (NullPointerException ex) {
+					System.out.println("Test");
+				}
+				
 				//System.out.println("Gesamtbetrag: " + totalAmount);
 			}
 		});
-		btnNewButton.setBounds(6, 198, 160, 23);
+		btnNewButton.setBounds(10, 200, 154, 23);
 		contentPane.add(btnNewButton);
 
 		Label label = new Label("Willkommen!");
-		label.setBounds(10, 10, 86, 34);
+		label.setAlignment(Label.CENTER);
+		label.setForeground(Color.WHITE);
+		label.setFont(new Font("Bahnschrift", Font.PLAIN, 12));
+		label.setBackground(Color.BLACK);
+		label.setBounds(10, 10, 154, 34);
 		contentPane.add(label);
 
 		JLabel lblNewLabel = new JLabel("Gesamtbetrag:");
-		lblNewLabel.setBounds(243, 169, 127, 14);
+		lblNewLabel.setBounds(199, 169, 86, 14);
 		contentPane.add(lblNewLabel);
 
 		JButton btnNewButton_1 = new JButton("Alles stornieren");
+		btnNewButton_1.setBackground(Color.LIGHT_GRAY);
 
 		btnNewButton_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// 1. remove all visible ordered item on scrollPane_1 
-				orderItems.removeAll(orderItems);
+				try {				if(orderItems.get(0)=="") {
+					orderItems.removeAll(orderItems);
 				System.out.println(orderItems);
+					
+				}
+				
 				orders = new JList(orderItems.toArray());
 				scrollPane_1.setViewportView(orders);
 				
 				// 2. reset totalamount for the receipt
 				totalAmount = 0; // init again 
 				lblNewLabel_1.setText(totalAmount + "");
+					
+				} catch (IndexOutOfBoundsException ex) {
+					System.out.println("Test2");
+				}
+
 			}
 		});
 
@@ -159,12 +191,14 @@ public class MonaSoohyunCafe extends JFrame {
 		contentPane.add(btnNewButton_1);
 		
 		JButton btnNewButton_2 = new JButton("Bestellen");
+		btnNewButton_2.setBackground(Color.YELLOW);
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println(orderItems);
 				System.out.println("Gesamtbetrag: " + totalAmount);
 				
-				File file = new File("/Users/mona/git/MonaCafe/JavaUnterricht/src/cafeInterface/GutenAppetit.png");
+				File file = new File("src/images/coffee.PNG");
+		
 				BufferedImage img;
 				try {
 					img = ImageIO.read(file);
@@ -182,8 +216,24 @@ public class MonaSoohyunCafe extends JFrame {
 				
 			}
 		});
-		btnNewButton_2.setBounds(327, 221, 117, 29);
+		btnNewButton_2.setBounds(199, 230, 136, 29);
 		contentPane.add(btnNewButton_2);
+		
+		JButton btnNewButton_3 = new JButton("New button");
+		btnNewButton_3.setIcon(new ImageIcon("src\\images\\pikachu.gif.gif"));
+
+		btnNewButton_3.setBounds(454, 10, 175, 202);
+		contentPane.add(btnNewButton_3);
+		
+		JButton btnNewButton_4 = new JButton("HELP");
+		btnNewButton_4.setForeground(Color.YELLOW);
+		btnNewButton_4.setBackground(Color.DARK_GRAY);
+		btnNewButton_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnNewButton_4.setBounds(454, 233, 86, 23);
+		contentPane.add(btnNewButton_4);
 
 	}
 }
